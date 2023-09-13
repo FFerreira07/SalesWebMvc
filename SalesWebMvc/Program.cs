@@ -11,19 +11,12 @@ builder.Services.AddDbContext<SalesWebMvcContext>(options =>
 });
 
 
-//Services.AddDbContext<SalesWebMvcContext>(options =>
-//options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
-//builder.MigrationsAssembly("SalesWebMvc")));
-
-
-//Services.AddDbContext<SalesWebMvcContext>(options =>
-//options.UseSqlServer(builder.Configuration.GetConnectionString("SalesWebMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMvcContext' not found.")));
-
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -31,6 +24,11 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    var seedingService = app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>();
+    seedingService.Seed();
 }
 
 app.UseHttpsRedirection();
