@@ -1,4 +1,6 @@
-﻿namespace SalesWebMvc.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace SalesWebMvc.Models
 {
     public class Seller
     {
