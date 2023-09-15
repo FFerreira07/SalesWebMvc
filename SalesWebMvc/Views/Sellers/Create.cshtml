@@ -1,4 +1,4 @@
-﻿@model SalesWebMvc.Models.Seller
+﻿@model SalesWebMvc.Models.ViewModels.SellerFormViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,20 +12,24 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="mb-3">
-                <label class="form-label" asp-for="Name"></label>
-                <input class="form-control" asp-for="Name" />
+                <label class="form-label" asp-for="Seller.Name"></label>
+                <input class="form-control" asp-for="Seller.Name" />
             </div>
             <div class="mb-3">
-                <label class="form-label" asp-for="Email"></label>
-                <input class="form-control" asp-for="Email" />
+                <label class="form-label" asp-for="Seller.Email"></label>
+                <input class="form-control" asp-for="Seller.Email" />
             </div>
             <div class="mb-3">
-                <label class="form-label" asp-for="BirthDate"></label>
-                <input class="form-control" asp-for="BirthDate" />
+                <label class="form-label" asp-for="Seller.BirthDate"></label>
+                <input class="form-control" asp-for="Seller.BirthDate" />
             </div>
             <div class="mb-3">
-                <label class="form-label" asp-for="BaseSalary"></label>
-                <input class="form-control" asp-for="BaseSalary" />
+                <label class="form-label" asp-for="Seller.BaseSalary"></label>
+                <input class="form-control" asp-for="Seller.BaseSalary" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Seller.DepartmentId"></label>
+                <select class="form-select" aria-label="Default select example" asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments,"Id","Name"))"></select>
             </div>
             <div class="mb-3">
                 <input type="submit" value="Create" class="btn btn-secondary" />
