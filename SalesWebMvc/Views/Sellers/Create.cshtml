@@ -11,21 +11,29 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="All" class=" text-danger"></div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Seller.Name"></label>
                 <input class="form-control" asp-for="Seller.Name" />
+                <span asp-validation-for="Seller.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Seller.Email"></label>
                 <input class="form-control" asp-for="Seller.Email" />
+                <span asp-validation-for="Seller.Email" class="text-danger"></span>
+
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Seller.BirthDate"></label>
                 <input class="form-control" asp-for="Seller.BirthDate" />
+                <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
+
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Seller.BaseSalary"></label>
                 <input class="form-control" asp-for="Seller.BaseSalary" />
+                <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
+
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="Seller.Department"></label>
@@ -37,3 +45,9 @@
         </form>
     </div>
 </div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

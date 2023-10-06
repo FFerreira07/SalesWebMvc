@@ -25,7 +25,7 @@ var app = builder.Build();
 var enUs = new CultureInfo("en-US");
 var localizationOptions = new RequestLocalizationOptions
 {
-    DefaultRequestCulture = new RequestCulture("en-US"),
+    DefaultRequestCulture = new RequestCulture(enUs),
     SupportedCultures = new List<CultureInfo> { enUs },
     SupportedUICultures = new List<CultureInfo> { enUs }
 };
