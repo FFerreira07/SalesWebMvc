@@ -32,16 +32,23 @@ namespace SalesWebMvc.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id);
-            _context.Seller.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
         public async Task UpdateAsync(Seller seller)
         {
             bool hasAny = await _context.Seller.AnyAsync(obj => obj.Id == seller.Id);
 
-            if (!hasAny) 
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
             }
@@ -51,7 +58,8 @@ namespace SalesWebMvc.Services
                 _context.Seller.Update(seller);
                 await _context.SaveChangesAsync();
 
-            } catch (DbUpdateConcurrencyException e) 
+            }
+            catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
             }
